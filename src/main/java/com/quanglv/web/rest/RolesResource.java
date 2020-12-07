@@ -1,5 +1,6 @@
 package com.quanglv.web.rest;
 
+import com.quanglv.repository.RolesRepository;
 import com.quanglv.service.RolesService;
 import com.quanglv.web.rest.request.UpdateRolesRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,16 @@ public class RolesResource {
     @Autowired
     private RolesService rolesService;
 
+    @Autowired
+    private RolesRepository rolesRepository;
+
     @PostMapping(value = "/update-roles", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Long>> getEmployees(@RequestBody UpdateRolesRequest request) {
         return ResponseEntity.ok(rolesService.saveRoles(request.getRoles()));
+    }
+
+    @PostMapping(value = "/get-all", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getEmployees() {
+        return ResponseEntity.ok((rolesRepository.findAll()));
     }
 }

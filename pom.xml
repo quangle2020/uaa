@@ -32,11 +32,11 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>jp.co.softbrain.esales</groupId>
-            <artifactId>esale-utils</artifactId>
-            <version>${esale-utils.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>jp.co.softbrain.esales</groupId>-->
+<!--            <artifactId>esale-utils</artifactId>-->
+<!--            <version>${esale-utils.version}</version>-->
+<!--        </dependency>-->
         <!-- spring boot-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

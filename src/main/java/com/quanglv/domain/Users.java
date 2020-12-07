@@ -35,12 +35,6 @@ public class Users extends AbstractAuditingEntity implements Serializable {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "employee_id")
-    private Long employeeId;
-
-    @Column(name = "email")
-    private String email;
-
     @Column(name = "status")
     private Long status;
 
