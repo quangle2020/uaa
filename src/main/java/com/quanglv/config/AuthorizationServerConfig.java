@@ -10,9 +10,16 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.token.AccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+
+import javax.sql.DataSource;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
 
 @Configuration
 @EnableAuthorizationServer
@@ -30,6 +37,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     static final int ACCESS_TOKEN_VALIDITY_SECONDS = 600*60*60;
     static final int FREFRESH_TOKEN_VALIDITY_SECONDS = 3600*60*60;
 
+    @Autowired
+    private DataSource dataSource;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -37,17 +46,17 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private BCryptPasswordEncoder encoder;
 
-    @Bean
-    public JwtAccessTokenConverter accessTokenConverter() {
-        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        converter.setSigningKey("as466gf");
-        return converter;
-    }
+//    @Bean
+//    public JwtAccessTokenConverter accessTokenConverter() {
+//        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+//        converter.setSigningKey("as466gf");
+//        return converter;
+//    }
 
-    @Bean
-    public TokenStore tokenStore() {
-        return new JwtTokenStore(accessTokenConverter());
-    }
+//    @Bean
+//    public TokenStore tokenStore() throws NoSuchAlgorithmException {
+//        return new JwtTokenStore(accessTokenConverter());
+//    }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
@@ -62,11 +71,36 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .refreshTokenValiditySeconds(FREFRESH_TOKEN_VALIDITY_SECONDS);
     }
 
+//    @Override
+//    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
+//        endpoints.tokenStore(tokenStore())
+//                .authenticationManager(authenticationManager)
+//                .accessTokenConverter(accessTokenConverter());
+//    }
+
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-        endpoints.tokenStore(tokenStore())
-                .authenticationManager(authenticationManager)
-                .accessTokenConverter(accessTokenConverter());
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        endpoints.authenticationManager(authenticationManager);
+        endpoints.tokenStore(tokenStore());
+        endpoints.accessTokenConverter(accessTokenConverter());
+    }
+
+    @Bean
+    public KeyPair keyPair() throws NoSuchAlgorithmException {
+        KeyPair keyPair = KeyPairGenerator.getInstance("RSA").generateKeyPair();
+        return keyPair;
+    }
+
+    @Bean
+    public AccessTokenConverter accessTokenConverter() throws NoSuchAlgorithmException {
+        JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
+        accessTokenConverter.setKeyPair(keyPair());
+        return accessTokenConverter;
+    }
+
+    @Bean
+    TokenStore tokenStore() {
+        return new InMemoryTokenStore();
     }
 
 }
