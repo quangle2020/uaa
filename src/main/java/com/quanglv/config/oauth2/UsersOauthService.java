@@ -22,7 +22,7 @@ public class UsersOauthService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        repo.findAll();
+//        repo.findAll();
 
         Users domain = repo.findByUsernameAndStatus(username, AppConstant.STATUS.ACTIVE_STATUS);
         if (domain == null) {

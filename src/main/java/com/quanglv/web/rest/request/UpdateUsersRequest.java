@@ -16,5 +16,5 @@ import java.util.List;
 public class UpdateUsersRequest implements Serializable {
 
     private static final long serialVersionUID = 6641306186001226671L;
-    private List<Users> users;
+    private Users user;
 }

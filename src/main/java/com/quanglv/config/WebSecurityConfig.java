@@ -34,18 +34,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .passwordEncoder(encoder());
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .anonymous().disable()
-                .authorizeRequests()
-                .antMatchers("/api/**").permitAll();
-    }
-
     @Bean
     public BCryptPasswordEncoder encoder(){
         return new BCryptPasswordEncoder();
     }
 
+        @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .csrf().disable()
+                .anonymous().disable()
+                .authorizeRequests()
+                .antMatchers("/api/**").authenticated();
+    }
 }

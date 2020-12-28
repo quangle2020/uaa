@@ -20,7 +20,7 @@ public class UsersResource {
     private UsersService usersService;
 
     @PostMapping(value = "/update-users", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Long>> getEmployees(@RequestBody UpdateUsersRequest request) {
-        return ResponseEntity.ok(usersService.saveUsers(request.getUsers()));
+    public ResponseEntity<Long> getEmployees(@RequestBody UpdateUsersRequest request) {
+        return ResponseEntity.ok(usersService.saveUsers(request.getUser()));
     }
 }

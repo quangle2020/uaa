@@ -11,5 +11,5 @@ public interface UsersService {
      * @param users
      * @return
      */
-    List<Long> saveUsers(List<Users> users);
+    Long saveUsers(Users users);
 }
