@@ -7,13 +7,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 //@EnableResourceServer
-public class LoginApp implements WebMvcConfigurer {
+public class ProductsApp implements WebMvcConfigurer {
 
     private static final String UPLOAD_PATH = "/src/main/file/";
 
     public static void main(String[] args) {
         System.setProperty("spring.devtools.restart.enabled", "false");
-        SpringApplication.run(LoginApp.class, args);
+        SpringApplication.run(ProductsApp.class, args);
     }
 
     @Override
