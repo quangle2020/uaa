@@ -38,8 +38,8 @@ public class Products extends AbstractAuditingEntity implements Serializable {
     @Column(name = "promotion")
     private Integer promotion;
 
+    @Column(name = "status")
+    private Integer status;
 
-//    @ManyToMany(mappedBy = "roles")
-//    private List<Users> users = new ArrayList<>();
 }
 

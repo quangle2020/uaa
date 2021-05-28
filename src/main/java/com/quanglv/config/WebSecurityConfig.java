@@ -17,7 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UsersOauthService usersOauthService;
@@ -35,16 +35,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     }
 
     @Bean
-    public BCryptPasswordEncoder encoder(){
+    public BCryptPasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
 
-        @Override
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .anonymous().disable()
                 .authorizeRequests()
                 .antMatchers("/api/**").authenticated();
+//                .anyRequest().authenticated();
     }
 }

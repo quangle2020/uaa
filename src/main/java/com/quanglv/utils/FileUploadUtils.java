@@ -43,7 +43,7 @@ public class FileUploadUtils {
             Files.copy(inputStream, rootPath.resolve(fileName), StandardCopyOption.REPLACE_EXISTING);
         }
 
-        return "http://localhost:9999" + "/" + saveFilePath + fileName;
+        return "http://13.213.11.72:9999" + "/" + saveFilePath + fileName;
     }
 
 //    /**

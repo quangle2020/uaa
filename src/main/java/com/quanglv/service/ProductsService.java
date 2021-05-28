@@ -1,12 +1,16 @@
 package com.quanglv.service;
 
-import com.quanglv.domain.Products;
+import com.quanglv.service.dto.ProductsDTO;
+import com.quanglv.service.dto.ProductsSearchRequestDTO;
+import com.quanglv.service.dto.ProductsSearchResponseDTO;
 
 import java.util.List;
 
 public interface ProductsService {
 
-    List<Products> getAll();
+    List<ProductsDTO> getAll();
 
-    Products save(Products request);
+    ProductsDTO save(ProductsDTO request);
+
+    ProductsSearchResponseDTO search(ProductsSearchRequestDTO requestDTO);
 }
