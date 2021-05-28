@@ -12,7 +12,7 @@ import com.quanglv.service.mapper.ProductsMapper;
 import com.quanglv.service.mapper.ProductsMapperManual;
 import com.quanglv.type.OperationTypes;
 import com.quanglv.type.ProductStatusTypes;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
