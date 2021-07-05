@@ -1,4 +1,4 @@
-package com.quanglv.web.rest.request;
+package com.quanglv.service.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

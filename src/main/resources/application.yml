@@ -3,15 +3,23 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://postgres.cve67twiaqf9.ap-southeast-1.rds.amazonaws.com:5432/uaa?useSSL=false
+    url: jdbc:postgresql://postgres.cve67twiaqf9.ap-southeast-1.rds.amazonaws.com:5432/products?useSSL=false
     username: postgres
     password: mydb123456
     driver-class-name: org.postgresql.Driver
-
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 150MB
+      max-request-size: 150MB
 
+
+file:
+  rootDirectory: ${ROOT_DIRECTORY:file:/file-stores/}
+  templateDirectory: ${TEMPLATE_DIRECTORY:file:/file-stores/template/}
+  productsDirectory: ${PRODUCTS_DIRECTORY:file:/file-stores/public/products/}
 
 

@@ -40,6 +40,5 @@ public class Products extends AbstractAuditingEntity implements Serializable {
 
     @Column(name = "status")
     private Integer status;
-
 }
 

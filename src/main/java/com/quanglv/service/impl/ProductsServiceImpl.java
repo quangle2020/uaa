@@ -66,7 +66,7 @@ public class ProductsServiceImpl implements ProductsService {
         if (StringUtils.isBlank(req.getOrder()))
             req.setOrder("DESC");
         if (StringUtils.isBlank(req.getSortName()))
-            req.setSortName("ID");
+            req.setSortName("id");
 
         Sort sort;
         if (req.getOrder().equalsIgnoreCase("DESC"))

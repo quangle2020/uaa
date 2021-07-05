@@ -2,7 +2,7 @@ package com.quanglv.web.rest;
 
 import com.quanglv.repository.RolesRepository;
 import com.quanglv.service.RolesService;
-import com.quanglv.web.rest.request.UpdateRolesRequest;
+import com.quanglv.service.dto.request.UpdateRolesRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

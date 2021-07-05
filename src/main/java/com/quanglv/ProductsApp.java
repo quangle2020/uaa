@@ -1,5 +1,7 @@
 package com.quanglv;
 
+import com.quanglv.config.FileConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -9,7 +11,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 //@EnableResourceServer
 public class ProductsApp implements WebMvcConfigurer {
 
-    private static final String UPLOAD_PATH = "/src/main/file/";
+    @Autowired
+    private FileConfig fileConfig;
 
     public static void main(String[] args) {
         System.setProperty("spring.devtools.restart.enabled", "false");
@@ -18,7 +21,6 @@ public class ProductsApp implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        String pathUpload = "file:///" + System.getProperty("user.dir").replaceAll("\\\\", "/") + UPLOAD_PATH;
-        registry.addResourceHandler("/file/**").addResourceLocations(pathUpload);
+        registry.addResourceHandler("/file/**").addResourceLocations(fileConfig.getProductsDirectory());
     }
 }

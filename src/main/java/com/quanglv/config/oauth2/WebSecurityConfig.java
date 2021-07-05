@@ -1,4 +1,4 @@
-package com.quanglv.config;
+package com.quanglv.config.oauth2;
 
 import com.quanglv.config.oauth2.UsersOauthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +46,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anonymous().disable()
                 .authorizeRequests()
                 .antMatchers("/api/**").authenticated();
-//                .anyRequest().authenticated();
     }
 }

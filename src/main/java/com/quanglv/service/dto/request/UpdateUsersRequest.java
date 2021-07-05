@@ -1,4 +1,4 @@
-package com.quanglv.web.rest.request;
+package com.quanglv.service.dto.request;
 
 import com.quanglv.domain.Users;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Data
 @NoArgsConstructor

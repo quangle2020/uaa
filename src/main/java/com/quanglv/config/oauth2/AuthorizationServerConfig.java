@@ -1,4 +1,4 @@
-package com.quanglv.config;
+package com.quanglv.config.oauth2;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
