@@ -1,11 +1,6 @@
 package com.quanglv.web.rest;
 
 import com.quanglv.service.FilesService;
-import com.quanglv.service.dto.FileUploadDTO;
-import com.quanglv.service.dto.TestDTO;
-import com.quanglv.utils.FileUploadUtils;
-import com.quanglv.utils.error.CustomizeException;
-import com.quanglv.service.dto.request.TestRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -16,20 +11,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/file")
+@RequestMapping(value = "/api")
 public class FilesResource {
 
     @Autowired
     private FilesService filesService;
 
-    @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> test(@ModelAttribute MultipartFile file) throws IOException {
+    @PostMapping(value = "/file/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> uploadInternal(@ModelAttribute MultipartFile file) throws IOException {
         return ResponseEntity.ok(filesService.uploadFile(file));
     }
 

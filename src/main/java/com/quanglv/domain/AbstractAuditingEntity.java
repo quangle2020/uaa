@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 
 @MappedSuperclass
@@ -20,18 +21,18 @@ public abstract class AbstractAuditingEntity implements Serializable {
     private static final long serialVersionUID = 6957172879983027097L;
 
     @CreatedDate
-    @Column(name = "created_date", updatable = false)
-    private Date createdDate = new Date();
+    @Column(name = "created_date", nullable = false, updatable = false)
+    private Instant createdDate;
 
     // @CreatedBy
     @Column(name = "created_user", nullable = false, updatable = false)
-    private Long createdUser = 1L;
+    private Long createdUser;
 
     @LastModifiedDate
-    @Column(name = "updated_date")
-    private Date updatedDate = new Date() ;
+    @Column(name = "updated_date", nullable = false)
+    private Instant updatedDate;
 
     // @LastModifiedBy
     @Column(name = "updated_user", nullable = false)
-    private Long updatedUser = 1L;
+    private Long updatedUser;
 }

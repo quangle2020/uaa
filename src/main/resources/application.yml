@@ -1,5 +1,7 @@
 server:
-  port: 9999
+  port: 8888
+  servlet:
+    context-path: /products
 
 spring:
   datasource:
@@ -20,6 +22,7 @@ spring:
 file:
   rootDirectory: ${ROOT_DIRECTORY:file:/file-stores/}
   templateDirectory: ${TEMPLATE_DIRECTORY:file:/file-stores/template/}
-  productsDirectory: ${PRODUCTS_DIRECTORY:file:/file-stores/public/products/}
+  publicDirectory: ${PRODUCTS_DIRECTORY:file:/file-stores/public/products/}
+  privateDirectory: ${PRODUCTS_DIRECTORY:file:/file-stores/public/products/}
 
 

@@ -9,5 +9,7 @@ import java.net.MalformedURLException;
 public interface FilesService {
     Resource downloadTemplate(String fileName) throws MalformedURLException;
 
+    Resource downloadFileExternal(String fileName) throws MalformedURLException;
+
     String uploadFile(MultipartFile file) throws IOException;
 }

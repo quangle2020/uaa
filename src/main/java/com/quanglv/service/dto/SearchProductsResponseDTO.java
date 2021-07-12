@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.codehaus.jackson.annotate.JsonProperty;
 
+import java.time.Instant;
 import java.util.Date;
 
 @JsonPropertyOrder({
@@ -51,10 +52,10 @@ public class SearchProductsResponseDTO {
     private Long createdUser;
 
     @JsonProperty("createdDate")
-    private Date createdDate;
+    private Instant createdDate;
 
     @JsonProperty("updatedDate")
-    private Date updatedDate;
+    private Instant updatedDate;
 
     @JsonProperty("updatedUser")
     private Long updatedUser;

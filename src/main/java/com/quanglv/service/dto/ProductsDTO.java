@@ -47,7 +47,7 @@ public class ProductsDTO {
     private Integer promotion;
 
     @JsonProperty("status")
-    private Integer status;
+    private String status;
 
     @JsonProperty("createdUser")
     private Long createdUser;

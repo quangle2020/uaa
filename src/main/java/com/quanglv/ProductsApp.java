@@ -1,6 +1,6 @@
 package com.quanglv;
 
-import com.quanglv.config.FileConfig;
+import com.quanglv.config.FilesConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class ProductsApp implements WebMvcConfigurer {
 
     @Autowired
-    private FileConfig fileConfig;
+    private FilesConfig fileConfig;
 
     public static void main(String[] args) {
         System.setProperty("spring.devtools.restart.enabled", "false");
@@ -21,6 +21,6 @@ public class ProductsApp implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/file/**").addResourceLocations(fileConfig.getProductsDirectory());
+        registry.addResourceHandler("/file/**").addResourceLocations(fileConfig.getPublicDirectory());
     }
 }

@@ -1,4 +1,4 @@
-package com.quanglv.web.rest;
+package com.quanglv.web.rest.publics;
 
 import com.quanglv.service.ProductsService;
 import com.quanglv.service.dto.ProductsSearchRequestDTO;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "")
-public class PublicResource {
+public class PublicProductsResource {
 
     @Autowired
     private ProductsService productsService;

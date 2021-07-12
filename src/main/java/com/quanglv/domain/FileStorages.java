@@ -14,20 +14,29 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class FileStorages extends AbstractAuditingEntity {
     @Id
-    @SequenceGenerator(name = "file_storage_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "file_storage_seq")
+//    @SequenceGenerator(name = "file_storage_seq", allocationSize = 1)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "file_storage_seq")
     @Column(name = "id", nullable = false)
     @NotNull
-    private Long id;
+    private String id;
 
-    @Column(name = "path")
-    private String path;
+    @Column(name = "file_path")
+    private String filePath;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "file_name")
+    private String fileName;
 
-    @Column(name = "storageDays")
-    private Integer storage_days;
+    @Column(name = "file_extension")
+    private String fileExtension;
+
+    @Column(name = "file_size")
+    private Long fileSize;
+
+    @Column(name = "file_type")
+    private String fileType;
+
+    @Column(name = "storage_days")
+    private Integer storageDays;
 
     @Column(name = "status")
     private String status;

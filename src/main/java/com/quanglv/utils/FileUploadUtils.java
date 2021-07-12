@@ -1,5 +1,6 @@
 package com.quanglv.utils;
 
+import com.quanglv.constant.Constants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,12 +17,12 @@ import java.util.UUID;
 @Component
 public class FileUploadUtils {
 
-    private String getExtensionFile(String fileName) {
+    public String getExtensionFile(String fileName) {
         String extension = "";
 
         int i = fileName.lastIndexOf('.');
         if (i > 0) {
-            extension = fileName.substring(i);
+            extension = fileName.substring(i + 1);
         }
         return extension;
     }
@@ -29,6 +30,7 @@ public class FileUploadUtils {
     public String genNewFileName(String fileName) {
         return new StringBuilder()
                 .append(UUID.randomUUID().toString())
+                .append(".")
                 .append(getExtensionFile(fileName))
                 .toString();
     }

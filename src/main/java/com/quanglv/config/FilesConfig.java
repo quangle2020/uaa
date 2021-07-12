@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @Data
-public class FileConfig {
+public class FilesConfig {
 
     @Value("${file.templateDirectory}")
     private String templateDirectory;
@@ -14,6 +14,9 @@ public class FileConfig {
     @Value("${file.rootDirectory}")
     private String rootDirectory;
 
-    @Value("${file.productsDirectory}")
-    private String productsDirectory;
+    @Value("${file.publicDirectory}")
+    private String publicDirectory;
+
+    @Value("${file.privateDirectory}")
+    private String privateDirectory;
 }

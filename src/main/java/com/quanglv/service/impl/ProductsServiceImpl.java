@@ -11,7 +11,7 @@ import com.quanglv.service.dto.ProductsSearchResponseDTO;
 import com.quanglv.service.mapper.ProductsMapper;
 import com.quanglv.service.mapper.ProductsMapperManual;
 import com.quanglv.type.OperationTypes;
-import com.quanglv.type.ProductStatusTypes;
+import com.quanglv.type.StatusTypes;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -48,8 +48,7 @@ public class ProductsServiceImpl implements ProductsService {
     public ProductsDTO save(ProductsDTO request) {
         request.setCreatedUser(1L);
         request.setUpdatedUser(1L);
-        request.setStatus(1);
-        request.setStatus(ProductStatusTypes.ACTIVE.getCode());
+        request.setStatus(StatusTypes.ACTIVE.getCode());
         request.setCreatedDate(new Date());
         request.setUpdatedDate(new Date());
         request.setPrice(request.getPrice());
