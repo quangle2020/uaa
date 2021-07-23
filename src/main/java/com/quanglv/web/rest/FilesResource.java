@@ -1,6 +1,7 @@
 package com.quanglv.web.rest;
 
 import com.quanglv.service.FilesService;
+import com.quanglv.service.dto.DownloadFileResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -11,9 +12,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.UUID;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "")
 public class FilesResource {
 
     @Autowired
@@ -24,7 +26,7 @@ public class FilesResource {
         return ResponseEntity.ok(filesService.uploadFile(file));
     }
 
-    @GetMapping("/download/template")
+    @GetMapping("/file/download/template")
     public ResponseEntity<Resource> downloadTemplate(@RequestParam String fileName) throws MalformedURLException {
         Resource resource = filesService.downloadTemplate(fileName);
 
@@ -35,5 +37,18 @@ public class FilesResource {
                 .headers(header)
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(resource);
+    }
+
+    @GetMapping("/file/download")
+    public ResponseEntity<Resource> downloadPublicFile(@RequestParam String fileId) throws MalformedURLException {
+        DownloadFileResponseDTO responseDTO = filesService.downloadPublicFile(fileId);
+
+        HttpHeaders header = new HttpHeaders();
+        header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + responseDTO.getFileName()  + "\"");
+
+        return ResponseEntity.ok()
+                .headers(header)
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(responseDTO.getResource());
     }
 }

@@ -1,13 +1,13 @@
 server:
   port: 8888
-  servlet:
-    context-path: /products
+#  servlet:
+#    context-path: /products
 
 spring:
   datasource:
-    url: jdbc:postgresql://postgres.cve67twiaqf9.ap-southeast-1.rds.amazonaws.com:5432/products?useSSL=false
-    username: postgres
-    password: mydb123456
+    url: ${URL:jdbc:postgresql://localhost:5432/products?useSSL=false}
+    username: ${USER_NAME:postgres}
+    password: ${PASSWORD:mydb123456}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -15,14 +15,13 @@ spring:
     show-sql: true
   servlet:
     multipart:
-      max-file-size: 150MB
-      max-request-size: 150MB
-
+      max-file-size: 11150MB
+      max-request-size: 11150MB
 
 file:
-  rootDirectory: ${ROOT_DIRECTORY:file:/file-stores/}
-  templateDirectory: ${TEMPLATE_DIRECTORY:file:/file-stores/template/}
-  publicDirectory: ${PRODUCTS_DIRECTORY:file:/file-stores/public/products/}
-  privateDirectory: ${PRODUCTS_DIRECTORY:file:/file-stores/public/products/}
+  rootDirectory: ${ROOT_DIRECTORY:file:/file-stores}
+  templateDirectory: ${TEMPLATE_DIRECTORY:file:/file-stores/template}
+  publicDirectory: ${PUBLIC_DIRECTORY:file:/file-stores/public}
+  privateDirectory: ${PRIVATE_DIRECTORY:file:/file-stores/private}
 
 

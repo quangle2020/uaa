@@ -4,6 +4,7 @@ import com.quanglv.config.FilesConfig;
 import com.quanglv.domain.FileStorages;
 import com.quanglv.repository.FilesStoragesRepository;
 import com.quanglv.service.FilesService;
+import com.quanglv.service.dto.DownloadFileResponseDTO;
 import com.quanglv.type.FileTypes;
 import com.quanglv.type.StatusTypes;
 import com.quanglv.utils.FileUploadUtils;
@@ -20,6 +21,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.Instant;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -44,12 +46,26 @@ public class FilesServiceImpl implements FilesService {
     }
 
     @Override
-    public Resource downloadFileExternal(String fileName) throws MalformedURLException {
-        String url = fileConfig.getTemplateDirectory() + fileName;
+    public DownloadFileResponseDTO downloadPublicFile(String fileId) throws MalformedURLException {
+        FileStorages entity = filesStoragesRepository.findById(fileId).orElse(null);
+
+        if(Objects.isNull(entity))
+            return null;
+
+        String url = fileConfig.getPublicDirectory()
+                + "/" + entity.getFileName()
+                + "." + entity.getFileExtension();
+
         Resource resource = new UrlResource(url);
+
         if (!resource.exists())
             return null;
-        return resource;
+
+        return DownloadFileResponseDTO
+                .builder()
+                .resource(resource)
+                .fileName(entity.getFileName() + "." + entity.getFileExtension())
+                .build();
     }
 
     @Override
@@ -59,23 +75,26 @@ public class FilesServiceImpl implements FilesService {
         if (!Files.exists(path))
             Files.createDirectories(path);
 
+        String fileName = UUID.randomUUID().toString();
+        String fileExtension = fileUploadUtils.getExtensionFile(file.getOriginalFilename());
+
         Files.copy(
                 file.getInputStream(),
-                path.resolve(fileUploadUtils.genNewFileName(file.getOriginalFilename())),
+                path.resolve(fileName + "." + fileExtension),
                 StandardCopyOption.REPLACE_EXISTING);
 
-        saveFileInfo(
-                fileUploadUtils.getExtensionFile(file.getOriginalFilename()),
+        return saveFileInfo(
+                fileName,
+                fileExtension,
                 FileTypes.PUBLIC.getCode(),
                 file.getSize());
 
-        return path.toAbsolutePath().toString();
     }
 
-    private String saveFileInfo(String fileExtension, String fileType, Long fileSize) {
+    private String saveFileInfo(String fileName, String fileExtension, String fileType, Long fileSize) {
         FileStorages entity = new FileStorages();
         entity.setId(UUID.randomUUID().toString());
-        entity.setFileName(UUID.randomUUID().toString());
+        entity.setFileName(fileName);
         entity.setFileExtension(fileExtension);
         entity.setFilePath(fileType);
         entity.setFileType(fileType);
