@@ -11,16 +11,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 //@EnableResourceServer
 public class ProductsApp implements WebMvcConfigurer {
 
-    @Autowired
-    private FilesConfig fileConfig;
+//    @Autowired
+//    private FilesConfig fileConfig;
 
     public static void main(String[] args) {
         System.setProperty("spring.devtools.restart.enabled", "false");
         SpringApplication.run(ProductsApp.class, args);
     }
 
-    @Override
-    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/file/**").addResourceLocations(fileConfig.getPublicDirectory());
-    }
+//    @Override
+//    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/file/**").addResourceLocations(fileConfig.getPublicDirectory());
+//    }
 }

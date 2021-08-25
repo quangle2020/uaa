@@ -5,7 +5,7 @@ server:
 
 spring:
   datasource:
-    url: ${URL:jdbc:postgresql://localhost:5432/products?useSSL=false}
+    url: ${URL:jdbc:postgresql://postgres.cve67twiaqf9.ap-southeast-1.rds.amazonaws.com:5432/postgres?useSSL=false}
     username: ${USER_NAME:postgres}
     password: ${PASSWORD:mydb123456}
     driver-class-name: org.postgresql.Driver
