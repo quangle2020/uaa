@@ -21,7 +21,7 @@ public class FilesResource {
     @Autowired
     private FilesService filesService;
 
-    @PostMapping(value = "/file/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "api/file/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> uploadInternal(@ModelAttribute MultipartFile file) throws IOException {
         return ResponseEntity.ok(filesService.uploadFile(file));
     }

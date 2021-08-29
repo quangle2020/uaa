@@ -50,6 +50,7 @@ public class ProvincesController {
             provinceCustomDto.setDistricts(districts);
             response.add(provinceCustomDto);
         });
+
         return ResponseEntity.ok(response);
     }
 }
