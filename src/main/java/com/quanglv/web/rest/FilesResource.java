@@ -2,6 +2,7 @@ package com.quanglv.web.rest;
 
 import com.quanglv.service.FilesService;
 import com.quanglv.service.dto.DownloadFileResponseDTO;
+import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -12,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "")
@@ -41,14 +41,15 @@ public class FilesResource {
 
     @GetMapping("/file/download")
     public ResponseEntity<Resource> downloadPublicFile(@RequestParam String fileId) throws MalformedURLException {
-        DownloadFileResponseDTO responseDTO = filesService.downloadPublicFile(fileId);
+        DownloadFileResponseDTO responseDTO = filesService.downloadFile(fileId);
 
         HttpHeaders header = new HttpHeaders();
-        header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + responseDTO.getFileName()  + "\"");
+        header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + responseDTO.getFileName() + "\"");
 
         return ResponseEntity.ok()
                 .headers(header)
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(responseDTO.getResource());
+
     }
 }

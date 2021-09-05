@@ -8,6 +8,7 @@ import com.quanglv.service.dto.DownloadFileResponseDTO;
 import com.quanglv.type.FileTypes;
 import com.quanglv.type.StatusTypes;
 import com.quanglv.utils.FileUploadUtils;
+import com.quanglv.utils.error.ProductsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -46,11 +47,11 @@ public class FilesServiceImpl implements FilesService {
     }
 
     @Override
-    public DownloadFileResponseDTO downloadPublicFile(String fileId) throws MalformedURLException {
+    public DownloadFileResponseDTO downloadFile(String fileId) throws MalformedURLException {
         FileStorages entity = filesStoragesRepository.findById(fileId).orElse(null);
 
         if(Objects.isNull(entity))
-            return null;
+            throw new ProductsException("File not found", "", "ERR_001");
 
         String url = fileConfig.getPublicDirectory()
                 + "/" + entity.getFileName()
@@ -59,7 +60,7 @@ public class FilesServiceImpl implements FilesService {
         Resource resource = new UrlResource(url);
 
         if (!resource.exists())
-            return null;
+            throw new ProductsException("File not found", "", "ERR_001");
 
         return DownloadFileResponseDTO
                 .builder()

@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.util.Date;
 
 @ControllerAdvice
 //@RestController
@@ -25,10 +27,10 @@ import java.time.LocalDate;
 //    }
 
     @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<?> handleException(CustomizeException ex){
+    public ResponseEntity<?> handleException(ProductsException ex){
 //        Map<String, Object> body = new LinkedHashMap<>();
 //        body.put("timestamp", Instant.now());
-        ex.getExtensions().put("timestamp", LocalDate.now());
+        ex.getExtensions().put("timestamp", Instant.now());
         return new ResponseEntity<>(ex.getExtensions(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
