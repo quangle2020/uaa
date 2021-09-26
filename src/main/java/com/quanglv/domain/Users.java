@@ -36,7 +36,7 @@ public class Users extends AbstractAuditingEntity implements Serializable {
     private String password;
 
     @Column(name = "status")
-    private Long status;
+    private String status;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role" , joinColumns = @JoinColumn(name = "user_id") ,

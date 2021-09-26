@@ -14,7 +14,7 @@ public class UserPrincipalOauth2 implements UserDetails {
 
     private String username;
 
-    private Long status;
+    private String status;
 
     @JsonIgnore
     private String password;
@@ -22,7 +22,7 @@ public class UserPrincipalOauth2 implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipalOauth2(String username, Long status, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipalOauth2(String username, String status, String password, Collection<? extends GrantedAuthority> authorities) {
         this.username = username;
         this.status = status;
         this.password = password;

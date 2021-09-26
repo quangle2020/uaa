@@ -21,7 +21,7 @@ public interface AppConstant {
     }
 
     interface STATUS{
-        final Long ACTIVE_STATUS = 1L;
+        final String ACTIVE_STATUS = "ACTIVE";
         final Long INACTIVE_STATUS = 0L;
     }
 }
